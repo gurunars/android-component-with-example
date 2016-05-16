@@ -1,0 +1,6 @@
+<manifest
+    package="com.{{cookiecutter.java_group_name}}.{{cookiecutter.java_name}}">
+
+    <application />
+
+</manifest>

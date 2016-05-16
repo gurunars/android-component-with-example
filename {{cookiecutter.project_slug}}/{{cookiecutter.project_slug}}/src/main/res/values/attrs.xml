@@ -1,0 +1,5 @@
+<resources>
+    <declare-styleable name="{{cookiecutter.class_name}}">
+        <attr name="text" format="string|reference" />
+    </declare-styleable>
+</resources>

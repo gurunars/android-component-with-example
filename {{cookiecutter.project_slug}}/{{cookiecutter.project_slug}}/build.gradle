@@ -1,0 +1,70 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+def buildInfo = [
+        siteUrl: 'https://github.com/{{cookiecutter.github_account}}/{{cookiecutter.project_slug}}',
+        gitUrl: 'https://github.com/{{cookiecutter.github_account}}/{{cookiecutter.project_slug}}.git',
+        name: "{{cookiecutter.project_slug}}",
+        group: "com.{{cookiecutter.java_group_name}}.{{cookiecutter.java_name}}",
+        version: "0.1",
+        versionCode: 1
+]
+
+group = buildInfo.group
+version = buildInfo.version
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '23.0.2'
+
+    lintOptions {
+        abortOnError false
+    }
+
+    defaultConfig {
+        minSdkVersion 17
+        targetSdkVersion 23
+        versionCode buildInfo.versionCode
+        versionName buildInfo.version
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-annotations:23.1.1'
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives']
+    pkg {
+        repo = "maven"
+        name = buildInfo.name
+        websiteUrl = buildInfo.siteUrl
+        vcsUrl = buildInfo.gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
+}
+
+bintrayUpload.dependsOn([build, sourcesJar])
