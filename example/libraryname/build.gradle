@@ -1,0 +1,77 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+def buildInfo = [
+        siteUrl: 'https://github.com/gurunars/libraryname',
+        gitUrl: 'https://github.com/gurunars/libraryname.git',
+        name: "libraryname",
+        group: "com.gurunars.libraryname",
+        version: "0.1",
+        versionCode: 1
+]
+
+group = buildInfo.group
+version = buildInfo.version
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '23.0.2'
+
+    lintOptions {
+        abortOnError false
+    }
+
+    defaultConfig {
+        minSdkVersion 17
+        targetSdkVersion 23
+        versionCode buildInfo.versionCode
+        versionName buildInfo.version
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile 'org.apmem.tools:layouts:1.10@aar'
+    compile 'com.android.support:support-annotations:23.1.1'
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task icons(type: Exec) {
+    executable "python"
+    args "../create_android_icons.py", "src/main/res/svg-icons", "src/main/res"
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives']
+    pkg {
+        repo = "maven"
+        name = buildInfo.name
+        websiteUrl = buildInfo.siteUrl
+        vcsUrl = buildInfo.gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
+}
+
+bintrayUpload.dependsOn([build, sourcesJar])
+preBuild.dependsOn([icons])
