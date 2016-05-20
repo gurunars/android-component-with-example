@@ -1,1 +1,1 @@
-include ':example', ':{{cookiecutter.project_slug}}'
+include ':example', ':core'
