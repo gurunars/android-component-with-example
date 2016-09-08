@@ -2,9 +2,10 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '23.0.2'
+    buildToolsVersion '23.0.3'
 
     defaultConfig {
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
         applicationId "com.{{cookiecutter.java_group_name}}.example"
         minSdkVersion 17
         targetSdkVersion 23
