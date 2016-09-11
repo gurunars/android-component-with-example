@@ -1,4 +1,4 @@
-package com.{{cookiecutter.java_group_name}}.example;
+package com.{{cookiecutter.java_group_name}}.{{cookiecutter.java_name}}.example;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
-        applicationId "com.{{cookiecutter.java_group_name}}.example"
+        applicationId "com.{{cookiecutter.java_group_name}}.{{cookiecutter.java_name}}.example"
         minSdkVersion 17
         targetSdkVersion 23
         versionCode 1

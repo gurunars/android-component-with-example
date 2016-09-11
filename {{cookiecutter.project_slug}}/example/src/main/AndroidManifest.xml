@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.{{cookiecutter.java_group_name}}.example">
+    package="com.{{cookiecutter.java_group_name}}.{{cookiecutter.java_name}}.example">
 
     <application android:allowBackup="true"
         android:label="@string/app_name"
