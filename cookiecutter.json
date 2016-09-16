@@ -1,9 +1,7 @@
 {
     "project_name": "Human Readable Name",
-    "java_group_name": "package_collection_name",
-    "github_account": "user_org_name",
-    "bintray_user": "Fill me (won't be added to git)",
-    "bintray_api_key": "Fill me (won't be added to git)",
+    "github_account": "gurunars",
+    "java_group_name": "{{ cookiecutter.github_account }}",
     "project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '-')  }}",
     "java_name": "{{ cookiecutter.project_name|lower|replace(' ', '_')  }}",
     "class_name": "{{ cookiecutter.project_name|title|replace(' ', '') }}",
