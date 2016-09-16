@@ -1,6 +1,6 @@
 {
     "project_name": "Human Readable Name",
-    "github_account": "gurunars",
+    "github_account": "USERNAME",
     "java_group_name": "{{ cookiecutter.github_account }}",
     "project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '-')  }}",
     "java_name": "{{ cookiecutter.project_name|lower|replace(' ', '_')  }}",
