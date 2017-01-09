@@ -2,20 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-def buildInfo = [
-        siteUrl: 'https://github.com/{{cookiecutter.github_account}}/{{cookiecutter.project_slug}}',
-        gitUrl: 'https://github.com/{{cookiecutter.github_account}}/{{cookiecutter.project_slug}}.git',
-        name: "{{cookiecutter.project_slug}}",
-        group: "com.{{cookiecutter.java_group_name}}.{{cookiecutter.java_name}}",
-        version: "0.1",
-        versionCode: 1
-]
-
-group = buildInfo.group
-version = buildInfo.version
-
 android {
-    compileSdkVersion 23
+    compileSdkVersion 25
     buildToolsVersion '23.0.3'
 
     lintOptions {
@@ -24,9 +12,9 @@ android {
 
     defaultConfig {
         minSdkVersion 17
-        targetSdkVersion 23
-        versionCode buildInfo.versionCode
-        versionName buildInfo.version
+        targetSdkVersion 25
+        versionCode versionCode
+        versionName version
     }
     buildTypes {
         release {
@@ -41,7 +29,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'javax.inject:javax.inject:1'
     compile 'com.google.code.findbugs:jsr305:2.0.1'
-    compile 'com.android.support:support-annotations:23.1.1'
+    compile 'com.android.support:support-annotations:25.1.0'
 }
 
 task sourcesJar(type: Jar) {
@@ -53,20 +41,17 @@ artifacts {
     archives sourcesJar
 }
 
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
 bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
+    user = bintrayUser
+    key = bintrayApikey
 
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = buildInfo.name
-        websiteUrl = buildInfo.siteUrl
-        vcsUrl = buildInfo.gitUrl
-        licenses = ["Apache-2.0"]
+        name = name
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = [license]
         publish = true
     }
 }
