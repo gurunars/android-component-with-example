@@ -2,6 +2,19 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
+def buildInfo = [
+    siteUrl: 'https://{{cookiecutter.github_account}}.github.io/{{cookiecutter.project_slug}}',
+    gitUrl: 'git@github.com:{{cookiecutter.github_account}}/{{cookiecutter.project_slug}}.git',
+    group: 'com.{{cookiecutter.java_group_name}}.{{cookiecutter.java_name}}',
+    name: '{{cookiecutter.project_slug}}',
+    version: '0.1',
+    versionCode: 1,
+    license: 'Apache-2.0'
+]
+
+group = buildInfo.group
+version = buildInfo.version
+
 android {
     compileSdkVersion 25
     buildToolsVersion '23.0.3'
@@ -13,9 +26,10 @@ android {
     defaultConfig {
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode versionCode
-        versionName version
+        versionCode buildInfo.versionCode
+        versionName buildInfo.version
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -48,10 +62,10 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = name
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = [license]
+        name = buildInfo.name
+        websiteUrl = buildInfo.siteUrl
+        vcsUrl = buildInfo.gitUrl
+        licenses = [buildInfo.license]
         publish = true
     }
 }
