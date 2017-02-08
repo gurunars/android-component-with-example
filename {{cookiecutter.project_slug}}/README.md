@@ -11,3 +11,9 @@ Add the following to your app's **build.gradle**:
         }
         ...
     }
+
+## More information
+
+Check the **example** app for a reference.
+
+Check [javadoc](https://{{cookiecuter.java_group_name}}.github.io/{{cookiecutter.project_slug}}/).
