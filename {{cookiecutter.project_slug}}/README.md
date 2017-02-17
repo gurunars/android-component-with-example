@@ -14,5 +14,5 @@ Add the following to your app's **build.gradle**:
 
 Check the **example** app for a reference.
 
-Check [javadoc](https://{{cookiecuter.java_group_name}}.github.io/{{cookiecutter.project_slug}}/)
+Check [javadoc](https://{{cookiecutter.java_group_name}}.github.io/{{cookiecutter.project_slug}}/)
 for usage information.
